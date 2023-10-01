@@ -9,23 +9,37 @@ package Model;
  * @author Admin
  */
 public class Student {
-    private String id;
+    private String code;
+    private String group;
     private String name;
+    private String status;
+    private String taker;
 
     public Student() {
     }
 
-    public Student(String id, String name) {
-        this.id = id;
+    public Student(String code, String group, String name, String status, String taker) {
+        this.code = code;
+        this.group = group;
         this.name = name;
+        this.status = status;
+        this.taker = taker;
     }
 
-    public String getId() {
-        return id;
+    public String getCode() {
+        return code;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getName() {
@@ -35,6 +49,25 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTaker() {
+        return taker;
+    }
+
+    public void setTaker(String taker) {
+        this.taker = taker;
+    }
+    
+
+
     
     
 }
