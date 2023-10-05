@@ -7,7 +7,7 @@ package Model;
 /**
  *
  * @author Admin
- */
+ *//
 public class Student {
     private String code;
     private String group;
