@@ -8,14 +8,104 @@
 <!DOCTYPE html>
 <html>
     <style>
-        .header-logo{
-            position: relative;
-    flex: 0 0 50%;
+        body {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.header-logo {
     display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
     align-items: center;
-        }
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.header-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+.breadcrumb-container {
+    background-color: #e9ecef;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.breadcrumb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.breadcrumb span a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.breadcrumb span a:hover {
+    text-decoration: underline;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], select {
+    padding: 8px 15px;
+    margin-right: 15px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+table, th, td {
+    border: 1px solid #dee2e6;
+}
+
+thead {
+    background-color: #6B90DA;
+    color: black;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+th {
+    background-color: #e9ecef;
+}
     </style>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -123,7 +213,6 @@
                     <th align="center">Thu</th>
                     <th align="center">Fri</th>
                     <th align="center">Sat</th>
-                    <th align="center">Sun</th>
                 </tr>
 
             </thead>
@@ -150,9 +239,7 @@
                     <th>
 
                     </th>
-                    <th>
-
-                    </th>
+                    
                 </tr>
                 <tr>
                     <th>
@@ -176,9 +263,7 @@
                     <th>
 
                     </th>
-                    <th>
-
-                    </th>
+                   
                 </tr>
                 <tr>
                     <th>
@@ -202,9 +287,7 @@
                     <th>
 
                     </th>
-                    <th>
-
-                    </th>
+                    
                 </tr>
                 <tr>
                     <th>
@@ -228,9 +311,7 @@
                     <th>
 
                     </th>
-                    <th>
-
-                    </th>
+                   
                 </tr>
             </tbody>
             <br><!-- comment -->
