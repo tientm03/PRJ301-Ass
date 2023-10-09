@@ -8,70 +8,10 @@
 <!DOCTYPE html>
 <html>
     <style>
-        body, ul, h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Header logo styling */
-.header-logo {
-    display: flex;
-    justify-content: center;
-    gap: 10px; /* Space between images */
-    padding: 10px 0;
-}
-
-.header-logo img {
-    max-width: 100%; /* Makes sure images are responsive */
-    height: auto;
-}
-
-/* Breadcrumb styling */
-.breadcrumb {
-    background-color: #f4f4f4;
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.breadcrumb span {
-    font-size: 16px;
-}
-
-.breadcrumb a {
-    text-decoration: none;
-    color: #007BFF;
-    transition: color 0.3s ease;
-}
-
-.breadcrumb a:hover {
-    color: #0056b3;
-}
-
-/* Table styling */
 table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #aaa;
-}
-
-th, td {
-    padding: 10px 15px;
-    text-align: center;
-}
-
-thead {
-    background-color: #6B90DA;
-    color: black;
-}
-
-tbody tr:nth-child(odd) {
-    background-color:#f4f4f4
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
 }
 
     </style>
@@ -96,25 +36,59 @@ tbody tr:nth-child(odd) {
             </ul>
         </form>
         
-        <table border="1" style="margin: 0 auto ;width: 80%;">
+        <table border="1" style="margin: 0 auto ;width: 90%;">
             <thead>
                 <tr style="background-color: #6B90DA; color: black">
-                    <th>No</th>
-                    <th>Class</th>
-                    <th>Code</th>
-                    <th>Name</th>
-                    <th>Attendance Status</th>
+                    <th style="width: 200px">Code</th>
+      <th style="width: 600px">Name</th>
+      <th style="width: 300px">Absent(%)so far</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
+      <th style="width: 100px;">02/11</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>
-                        ABSENT: 0%
-                    </td>
+                    <td>HE1234</td>
+                    <td>tan minh tien</td>
+                    <td>0%</td>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
+                    <th>p</th>
                 </tr>
             </tbody>
         </table>

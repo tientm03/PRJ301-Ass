@@ -1,6 +1,6 @@
 <%-- 
-    Document   : studentlist
-    Created on : Oct 7, 2023, 10:05:32 PM
+    Document   : afterattend
+    Created on : Oct 9, 2023, 9:04:07 PM
     Author     : Admin
 --%>
 
@@ -130,32 +130,31 @@ input[type="submit"]:hover {
           <th style="width: 200px">Image</th>
           <th>Comment</th>
           <th>Status</th>
-          
+          <th>Lecturer</th>
+          <th>Record time</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          <td>He1111</td>
-          <td>Tan minh htin</td>
-          <td>Tan minh htin</td>
-          <td><img src="#"/>
-          </td>
+          <td>123456</td>
+          <td>Tan min htien</td>
+          <td>Tan min htien</td>
+          <td></td>
           <td>
               <input type="text" name="comment" value=""/>
           </td>
           <td>
-      <input type="radio" id="attend" name="status" value="attend" required>
-      <label for="attend">Attend</label>&nbsp; |&nbsp;
-      <input type="radio" id="absent" name="status" value="absent">
-      <label for="absent">Absent
+              Attend
           </td>
+          <td>1</td>
+          <td>1</td>
         </tr>
       </tbody>
     </table>
     <br>
     <form style="text-align: center">
-    <input style="width: 100px" type="submit" value="Save" />
+    <input style="width: 100px" type="submit" value="Edit" />
     </form>
     </body>
 </html>
