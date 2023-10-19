@@ -4,6 +4,9 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Admin
@@ -11,17 +14,12 @@ package Model;
 public class Student {
     private String id;
     private String name;
-
-
-    public Student() {
-    }
-//
-
-    public Student(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
+    private boolean gender;
+    private Date dob;
+    private String address;
+    private String email;
+    private ArrayList<Group> groups = new ArrayList<>();
+    
     public String getId() {
         return id;
     }
@@ -36,6 +34,46 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public ArrayList<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
     }
    
     
