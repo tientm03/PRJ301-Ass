@@ -10,7 +10,7 @@ import java.sql.Date;
  *
  * @author Admin
  */
-class Session {
+public class Session {
     private int id;
     private Date date;
     private Group group;

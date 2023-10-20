@@ -8,7 +8,7 @@ package Model;
  *
  * @author Admin
  */
-class TimeSlot {
+public class TimeSlot {
     private int id;
     private String description;
 

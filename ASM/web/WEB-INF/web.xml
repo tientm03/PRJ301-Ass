@@ -12,6 +12,10 @@
         <servlet-name>Report</servlet-name>
         <servlet-class>AttendanceReport.Report</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TimeTable</servlet-name>
+        <servlet-class>TimeTableController.TimeTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/schedule</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Report</servlet-name>
         <url-pattern>/report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimeTable</servlet-name>
+        <url-pattern>/timetable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
