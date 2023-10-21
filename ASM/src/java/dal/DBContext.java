@@ -7,6 +7,8 @@ package dal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,14 +19,14 @@ public class DBContext {
     public DBContext()
     {
         try {
-            // Edit URL , username, password to authenticate with your MS SQL Server
-            String url = "jdbc:sqlserver://localhost:1433;databaseName= ASM_new";
-            String username = "sa";
-            String password = "30112003";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=ASM";
+            String user = "sa";
+            String pass = "30112003";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 }
