@@ -7,6 +7,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <h3>${requestScope.error}</h3>
         <form action="login" method="POST">
             Username: <input type="text" name="username"/> <br/>
             Password: <input type="password" name="password" /> <br/>

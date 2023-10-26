@@ -109,9 +109,9 @@
             background-color: #6B90DA;
         }
     </style>
-    <head>
+        <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>TimeTable</title>
     </head>
     <body>
         <form class="header-logo">
@@ -130,7 +130,7 @@
 
 
         <form style="text-align: center">
-            Lecturer: <input type="text" name="lecturer" value="" style="text-align: center;"/>
+            Lecturer: <input type="text" name="lecturer" value="${sessionScope.account.displayname}" style="text-align: center;"/>
         </form>
 
         <!--code bang timetable-->

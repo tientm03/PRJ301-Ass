@@ -34,7 +34,7 @@ public class SessionDBContext extends DBContext {
                     + "							INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
                     + "WHERE ses.iid = ? AND ses.[date] >= ? AND ses.[date] <= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, iid);
+            stm.setInt(1, iid); 
             stm.setDate(2, from);
             stm.setDate(3, to);
             ResultSet rs = stm.executeQuery();

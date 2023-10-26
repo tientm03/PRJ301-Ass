@@ -14,7 +14,19 @@
     </servlet>
     <servlet>
         <servlet-name>TimeTable</servlet-name>
-        <servlet-class>TimeTableController.TimeTable</servlet-class>
+        <servlet-class>Controller.TimeTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>Login.Login</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>Controller.Home</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Login.Logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>TimeTable</servlet-name>
         <url-pattern>/timetable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
