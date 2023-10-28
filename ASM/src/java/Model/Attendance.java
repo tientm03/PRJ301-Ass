@@ -59,4 +59,5 @@ public class Attendance {
         this.sessions = sessions;
     }
 
+
 }

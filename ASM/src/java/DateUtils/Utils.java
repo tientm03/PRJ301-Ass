@@ -16,10 +16,11 @@ import java.util.List;
  * @author Admin
  */
 public class Utils {
+
     public static List<Date> getDatesOfCurrentWeek() {
         List<Date> dates = new ArrayList<>();
         Calendar cal = Calendar.getInstance();  // gets the current date and time
-        
+
         // Set the calendar to the start of today
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
@@ -45,7 +46,8 @@ public class Utils {
 
         return dates;
     }
-        public static List<Date> getSQLDatesBetween(String start, String end) throws ParseException {
+
+    public static List<Date> getSQLDatesBetween(String start, String end) throws ParseException {
         List<Date> dates = new ArrayList<>();
 
         // Define a simple date format, e.g., "2023-01-01"
@@ -67,4 +69,33 @@ public class Utils {
 
         return dates;
     }
+
+
+    public static String getDayOfWeek(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+
+        switch (dayOfWeek) {
+            case Calendar.SUNDAY:
+                return "Chủ nhật";
+            case Calendar.MONDAY:
+                return "Thứ Hai";
+            case Calendar.TUESDAY:
+                return "Thứ Ba";
+            case Calendar.WEDNESDAY:
+                return "Thứ Tư";
+            case Calendar.THURSDAY:
+                return "Thứ Năm";
+            case Calendar.FRIDAY:
+                return "Thứ Sáu";
+            case Calendar.SATURDAY:
+                return "Thứ Bảy";
+
+            default:
+                return "Ngày không hợp lệ";
+        }
+    }
+
 }

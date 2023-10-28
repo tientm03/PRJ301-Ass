@@ -28,6 +28,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>Login.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Att</servlet-name>
+        <servlet-class>Controller.Att</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/schedule</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Att</servlet-name>
+        <url-pattern>/att</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

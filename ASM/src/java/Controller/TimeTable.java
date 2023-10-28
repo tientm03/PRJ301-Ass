@@ -55,13 +55,14 @@ public class TimeTable extends HttpServlet {
             }
             Date from = dates.get(0);
             Date to = dates.get(dates.size() - 1);
-
+            
             TimeSlotDBContext timeDB = new TimeSlotDBContext();
             ArrayList<TimeSlot> slots = timeDB.list();
 
             SessionDBContext sesDB = new SessionDBContext();
             ArrayList<Session> sessions = sesDB.getSessions(id, from, to);
-
+            
+            
             request.setAttribute("slots", slots);
             request.setAttribute("dates", dates);
             request.setAttribute("from", from);

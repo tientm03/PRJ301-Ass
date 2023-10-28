@@ -109,7 +109,7 @@
             background-color: #6B90DA;
         }
     </style>
-        <head>
+    <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TimeTable</title>
     </head>
@@ -122,7 +122,7 @@
         <form style="background-color:aliceblue; padding: 5px 8px; margin-bottom: 5px; ">
             <ul class="breadcrumb">
 
-                <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<b>Schedule</b></span>
+                <span id="home"><a href="home">Home</a>&nbsp;|&nbsp;<b>Schedule</b></span>
             </ul>
         </form>
 
@@ -142,42 +142,47 @@
         </form>
         <table border="1px">
             <thead>
-<!--            <tr>
-                <th rowspan="2"></th>
-                <th align="center">Mon</th>
-                <th align="center">Tue</th>
-                <th align="center">Wed</th>
-                <th align="center">Thu</th>
-                <th align="center">Fri</th>
-                <th align="center">Sat</th>
-                <th align="center">Sun</th>
-            </tr>-->
-            <tr>
-                <td></td>
-                <c:forEach items="${requestScope.dates}" var="d">
-                    <td>
-                        ${d}
-                    </td>
-                </c:forEach>
-            </tr>
+                <tr>
+                    <c:forEach items="${requestScope.day}" var="day">
+                        <td>
+                            ${day}
+                        </td>
+                    </c:forEach>
+                    <!--                    <th rowspan="2"></th>
+                                        <th align="center">Mon</th>
+                                        <th align="center">Tue</th>
+                                        <th align="center">Wed</th>
+                                        <th align="center">Thu</th>
+                                        <th align="center">Fri</th>
+                                        <th align="center">Sat</th>
+                                        <th align="center">Sun</th>-->
+                </tr>
+                <tr>
+                    <td></td>
+                    <c:forEach items="${requestScope.dates}" var="d">
+                        <td>
+                            ${d}
+                        </td>
+                    </c:forEach>
+                </tr>
             </thead>
-        <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
-            <tr>
-                <td>Slot ${s.id} (${s.description})</td>
-                <c:forEach items="${requestScope.dates}" var="d">
-                    <td>
-                        <c:forEach items="${requestScope.sessions}" var="k">
-                            <c:if test="${k.date eq d and k.slot.id eq s.id}">
-                                <a href="att?id=${k.id}">
-                                    ${k.group.name}-${k.group.subject.name}-${k.room.id}
-                                </a>
-                            </c:if>
-                        </c:forEach>
-                    </td>
-                </c:forEach>
-            </tr>
-        </c:forEach>
+            <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
+                <tr>
+                    <td>Slot ${s.id} (${s.description})</td>
+                    <c:forEach items="${requestScope.dates}" var="d">
+                        <td>
+                            <c:forEach items="${requestScope.sessions}" var="k">
+                                <c:if test="${k.date eq d and k.slot.id eq s.id}">
+                                    <a href="att?id=${k.id}">
+                                        ${k.group.name}-${k.group.subject.name}-${k.room.id}
+                                    </a>
+                                </c:if>
+                            </c:forEach>
+                        </td>
+                    </c:forEach>
+                </tr>
+            </c:forEach>
 
-    </table>
-</body>
+        </table>
+    </body>
 </html>
