@@ -32,6 +32,10 @@
         <servlet-name>Att</servlet-name>
         <servlet-class>Controller.Att</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportAtt</servlet-name>
+        <servlet-class>Controller.Report</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/schedule</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>Att</servlet-name>
         <url-pattern>/att</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportAtt</servlet-name>
+        <url-pattern>/reportatt</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

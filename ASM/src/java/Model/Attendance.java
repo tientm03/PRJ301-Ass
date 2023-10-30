@@ -13,11 +13,27 @@ import java.util.Date;
  */
 public class Attendance {
 
+    private Session session;
+    private Student student;
     private boolean status;
     private String description;
-    private Date date;
-    private ArrayList<Student> student = new ArrayList<>();
-    private ArrayList<Session> sessions = new ArrayList<>();
+    private Date datetime;
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     public boolean isStatus() {
         return status;
@@ -35,28 +51,12 @@ public class Attendance {
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public ArrayList<Student> getStudent() {
-        return student;
-    }
-
-    public void setStudent(ArrayList<Student> student) {
-        this.student = student;
-    }
-
-    public ArrayList<Session> getSessions() {
-        return sessions;
-    }
-
-    public void setSessions(ArrayList<Session> sessions) {
-        this.sessions = sessions;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
 

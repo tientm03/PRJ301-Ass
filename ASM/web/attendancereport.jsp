@@ -4,18 +4,19 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <style>
-table {
-  margin: 0 auto;
-  width: 80%;
-  text-align: center;
-}
+        table {
+            margin: 0 auto;
+            width: 80%;
+            text-align: center;
+        }
 
     </style>
-    
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -28,68 +29,32 @@ table {
         </form>
         <br>
         <br>
-        
+
         <form style="background-color:aliceblue; padding: 5px 8px; margin-bottom: 5px; ">
             <ul class="breadcrumb">
-                
-                    <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<b>Attendance Report</b></span>
+
+                <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<b>Attendance Report</b></span>
             </ul>
         </form>
-        
+
         <table border="1" style="margin: 0 auto ;width: 90%;">
             <thead>
                 <tr style="background-color: #6B90DA; color: black">
                     <th style="width: 200px">Code</th>
-      <th style="width: 600px">Name</th>
-      <th style="width: 300px">Absent(%)so far</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
-      <th style="width: 100px;">02/11</th>
+                    <th style="width: 600px">Name</th>
+                    <th style="width: 300px">Absent(%)so far</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>HE1234</td>
-                    <td>tan minh tien</td>
-                    <td>0%</td>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                    <th>p</th>
-                </tr>
+                    <c:forEach items="${requestScope.session}" var="a">
+
+                        <tr>
+                            <td>${a.getGroup().getStudents()}</td>
+                            <td></td>
+                            
+                            <td></td>
+                        </tr> 
+                    </c:forEach> 
             </tbody>
         </table>
     </body>

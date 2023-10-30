@@ -124,47 +124,63 @@
         <h1>Student List</h1>
         <h4>        ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
         </h4>
-        <table border="1" style="margin: 0 auto ;width: 80%;">
-            <thead>
-                <tr style="background-color: #6B90DA; color: black">
-                    <th>Code</th>
-                    <th>Class</th>
-                    <th>Name</th>
-                    <th style="width: 200px">Image</th>
-                    <th>Status</th>
-                    <td>Description</td>
-                    <td>Taking Time</td>
 
-                </tr>
-            </thead>
-<!--            <tbody>
-            <c:forEach items="${requestScope.atts}" var="a">
-                    <tr>
-                        <td>
-                            ${a.student.name}
-                            <input type="hidden" name="stuid" value="${a.student.id}"/>
-                        </td>
-                        <td>
-                            <input type="radio"
-                                   <c:if test="${!a.status}">
-                                       checked="checked"
-                                   </c:if>
-                                   name="status${a.student.id}" value="absent" /> absent
-                            <input type="radio"
-                                   <c:if test="${a.status}">
-                                       checked="checked"
-                                   </c:if>
-                                   name="status${a.student.id}" value="present" /> present
-                        </td>
-                        <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
-                        <td>${a.datetime}</td>
-                    </tr>   
-                </c:forEach>
-            </tbody>-->
-        </table>
-        <br>
-        <form style="text-align: center">
-            <input style="width: 100px" type="submit" value="Save" />
+        <form action="att" method="POST">
+            <table border="1" style="margin: 0 auto ;width: 80%;">
+                <thead>
+                    <tr style="background-color: #6B90DA; color: black">
+                        <th>No</th>
+                        <th>Class</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th style="width: 200px">Image</th>
+                        <th>Status</th>
+                        <td>Comment</td>
+                        <td>Taking Time</td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${requestScope.atts}" var="a" >
+                        <tr>
+                            <td></td>
+                            
+                            <td style="color: blue">${requestScope.ses.getGroup().getName()}</td>
+                            
+                            <td style="color: #007BFF">${a.student.id}</td>
+                            
+                            <td style="color: blue">
+                                ${a.student.name}
+                                <input type="hidden" name="stuid" value="${a.student.id}"/>
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="radio"
+                                       <c:if test="${!a.status}">
+                                           checked="checked"
+                                       </c:if>
+                                       name="status${a.student.id}" value="absent" />
+                                <label for="status${a.student.id}" style="color: red;">absent</label>
+                                <br>
+                                &nbsp;<input type="radio"
+                                       <c:if test="${a.status}">
+                                           checked="checked"
+                                       </c:if>
+                                       name="status${a.student.id}" value="present" />
+                                <label for="status${a.student.id}" style="color: green;">present</label>
+                            </td>
+                            <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
+                            <td>${a.datetime}</td>
+                        </tr>   
+                    </c:forEach>
+                </tbody>
+            </table>
+            <br>
+            <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
+            <input type="submit" value="Save"/>
         </form>
+
+
+
     </body>
 </html>

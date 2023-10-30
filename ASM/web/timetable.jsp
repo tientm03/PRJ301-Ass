@@ -148,7 +148,7 @@
                             ${day}
                         </td>
                     </c:forEach>
-                    <!--                    <th rowspan="2"></th>
+<!--                                        <th rowspan="2"></th>
                                         <th align="center">Mon</th>
                                         <th align="center">Tue</th>
                                         <th align="center">Wed</th>

@@ -34,9 +34,9 @@ public class Att extends HttpServlet {
         
         AttendenceDBContext attDb = new AttendenceDBContext();
         ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
-        
+
         request.setAttribute("atts", atts);
-        request.getRequestDispatcher("../view/instructor/att.jsp").forward(request, response);
+        request.getRequestDispatcher("att.jsp").forward(request, response);
     }
 
     
@@ -48,14 +48,10 @@ public class Att extends HttpServlet {
         String[] stuids = request.getParameterValues("stuid");
         for (String stuid : stuids) {
             Attendance a = new Attendance();
-            ArrayList<Session> sessions = new ArrayList<>();
-            sessions.add(ses);
-            a.setSessions(sessions);
+            a.setSession(ses);
             Student s = new Student();
             s.setId(stuid);
-            ArrayList<Student> student = new ArrayList<>();
-            student.add(s);
-            a.setStudent(student);
+            a.setStudent(s);
             a.setStatus(request.getParameter("status"+stuid).equals("present"));
             a.setDescription(request.getParameter("description"+stuid));
             ses.getAtts().add(a);
