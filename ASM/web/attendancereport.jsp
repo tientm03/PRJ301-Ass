@@ -36,25 +36,46 @@
                 <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<b>Attendance Report</b></span>
             </ul>
         </form>
-
+        Attendance Report for class ${requestScope.session.group.name}
         <table border="1" style="margin: 0 auto ;width: 90%;">
             <thead>
                 <tr style="background-color: #6B90DA; color: black">
-                    <th style="width: 200px">Code</th>
-                    <th style="width: 600px">Name</th>
-                    <th style="width: 300px">Absent(%)so far</th>
+
+                    <th >ID</th>
+                    <th>Name</th>
+                        <c:forEach items="${requestScope.sessions}" var="ses">
+
+                        <th>Slot${ses.index}-(${ses.date})</th>
+
+                    </c:forEach>
+                    <th>Absent(%)so far</th>
+
                 </tr>
             </thead>
             <tbody>
-                    <c:forEach items="${requestScope.session}" var="a">
-
-                        <tr>
-                            <td>${a.getGroup().getStudents()}</td>
-                            <td></td>
-                            
-                            <td></td>
-                        </tr> 
-                    </c:forEach> 
+                <c:forEach items="${requestScope.student}" var="stu"> 
+                    <c:set var="i" value="${i+1}"/>
+                    <tr>
+                        <td>${stu.id}</td>
+                        <td>${stu.name}</td>
+                        <c:forEach items="${requestScope.att}" var="att">
+                            <c:if test="${att.student.name eq stu.name}">
+                                <c:forEach items="${requestScope.sessions}" var="s">
+                                    <c:if test="${att.status and s.isAtt}">
+                                        <td style="color: green">${att.status?"attend":"absent"}</td>
+                                    </c:if>
+                                    <c:if test="${!att.status and s.isAtt }">
+                                        <td style="color: red">${att.status?"attend":"absent"}</td>
+                                    </c:if>
+                                    <c:if test="${ !s.isAtt }">
+                                        <td style="color: grey">-</td>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                        </c:forEach>
+                        <td>${requestScope.absent[i-1]}</td>
+                    </tr>
+                </c:forEach>    
             </tbody>
         </table>
     </body>

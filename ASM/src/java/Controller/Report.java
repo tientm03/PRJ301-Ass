@@ -28,42 +28,28 @@ public class Report extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int gid = Integer.parseInt(request.getParameter("gid"));
-        
+
         SessionDBContext sedb = new SessionDBContext();
         StudentDBContext sdb = new StudentDBContext();
         AttendenceDBContext adb = new AttendenceDBContext();
-        
+
         ArrayList<Student> stu = sdb.getStuByGroupID(gid);
-        
-        ArrayList<Session> ses = sedb.getSessionsByGroupID(gid);
-        
-        ArrayList<Attendance> atts = adb.getAttendancesByGroupID(gid);
-        
-        ArrayList<Float> absent=adb.getAbsent(stu, ses, atts);
-        for (Session se : ses) {
-            se.getId();
-        }
-        for (Attendance attn : atts) {
-            attn.isStatus();
-        }
-        
-        for (Student attn : stu) {
-            attn.getName();
-        }
-        
-        request.setAttribute("absent", absent);
         request.setAttribute("student", stu);
-        request.setAttribute("session", ses);
-        request.setAttribute("att", atts); 
+        ArrayList<Session> ses = sedb.getSessionsByGroupID(gid);
+        request.setAttribute("sessions", ses);
+        ArrayList<Attendance> atts = adb.getAttendancesByGroupID(gid);
+        request.setAttribute("att", atts);
+        ArrayList<Float> absent = adb.getAbsent(stu, ses, atts);
+        request.setAttribute("absent", absent);
+        Session s = sedb.get1SessionsByGroupID(gid);
+        request.setAttribute("session", s);
         request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
 
-   
+    }
 
 }

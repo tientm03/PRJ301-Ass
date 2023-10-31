@@ -148,14 +148,14 @@
                             ${day}
                         </td>
                     </c:forEach>
-<!--                                        <th rowspan="2"></th>
-                                        <th align="center">Mon</th>
-                                        <th align="center">Tue</th>
-                                        <th align="center">Wed</th>
-                                        <th align="center">Thu</th>
-                                        <th align="center">Fri</th>
-                                        <th align="center">Sat</th>
-                                        <th align="center">Sun</th>-->
+                    <!--                                        <th rowspan="2"></th>
+                                                            <th align="center">Mon</th>
+                                                            <th align="center">Tue</th>
+                                                            <th align="center">Wed</th>
+                                                            <th align="center">Thu</th>
+                                                            <th align="center">Fri</th>
+                                                            <th align="center">Sat</th>
+                                                            <th align="center">Sun</th>-->
                 </tr>
                 <tr>
                     <td></td>
@@ -175,6 +175,12 @@
                                 <c:if test="${k.date eq d and k.slot.id eq s.id}">
                                     <a href="att?id=${k.id}">
                                         ${k.group.name}-${k.group.subject.name}-${k.room.id}
+                                        <c:if test="${k.isAtt}">
+                                            (attended)
+                                        </c:if>
+                                        <c:if test="${!k.isAtt}">
+                                            (not yet)
+                                        </c:if>
                                     </a>
                                 </c:if>
                             </c:forEach>
