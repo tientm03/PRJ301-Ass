@@ -36,6 +36,19 @@
                 <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<b>Attendance Report</b></span>
             </ul>
         </form>
+        <form action="reportatt" method="get">
+            Group:<select name="gid">
+
+                <c:forEach items="${requestScope.group}" var="group">
+                    <option <c:if test="${group.id eq param.gid}">
+                            selected="selected"
+                        </c:if> value="${group.id}">${group.name}</option>
+                </c:forEach>
+                <input type="hidden" name="iid" value="${param.iid}"/>
+            </select>
+            <input type="submit" value="View" /><br>
+        </form>
+
         Attendance Report for class ${requestScope.session.group.name}
         <table border="1" style="margin: 0 auto ;width: 90%;">
             <thead>
@@ -43,11 +56,12 @@
 
                     <th >ID</th>
                     <th>Name</th>
-                        <c:forEach items="${requestScope.sessions}" var="ses">
+                   <c:forEach items="${requestScope.sessions}" var="ses">
 
                         <th>Slot${ses.index}-(${ses.date})</th>
 
                     </c:forEach>
+
                     <th>Absent(%)so far</th>
 
                 </tr>
@@ -55,28 +69,34 @@
             <tbody>
                 <c:forEach items="${requestScope.student}" var="stu"> 
                     <c:set var="i" value="${i+1}"/>
+
+
                     <tr>
                         <td>${stu.id}</td>
                         <td>${stu.name}</td>
                         <c:forEach items="${requestScope.att}" var="att">
-                            <c:if test="${att.student.name eq stu.name}">
-                                <c:forEach items="${requestScope.sessions}" var="s">
-                                    <c:if test="${att.status and s.isAtt}">
+                            <c:if test="${att.student.id eq stu.id}">
+                                <c:choose>
+
+                                    <c:when test="${att.status}">
                                         <td style="color: green">${att.status?"attend":"absent"}</td>
-                                    </c:if>
-                                    <c:if test="${!att.status and s.isAtt }">
+                                    </c:when>
+
+                                    <c:when test="${!att.status}">
                                         <td style="color: red">${att.status?"attend":"absent"}</td>
-                                    </c:if>
-                                    <c:if test="${ !s.isAtt }">
-                                        <td style="color: grey">-</td>
-                                    </c:if>
-                                </c:forEach>
+                                    </c:when>
+                                </c:choose>
                             </c:if>
                         </c:forEach>
-                        <td>${requestScope.absent[i-1]}</td>
+                                    <c:forEach items="${requestScope.sesnotatt}" var="sesnotatt">
+                                        <td style="color: grey">-</td>
+                                    </c:forEach>                
+                        <td>${requestScope.absent[i-1]}%</td>
                     </tr>
+
                 </c:forEach>    
             </tbody>
         </table>
+
     </body>
 </html>

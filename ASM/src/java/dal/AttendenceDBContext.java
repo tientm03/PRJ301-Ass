@@ -8,6 +8,7 @@ import Model.Attendance;
 import Model.Group;
 import Model.Session;
 import Model.Student;
+import static java.lang.Math.round;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,20 +25,19 @@ public class AttendenceDBContext extends DBContext {
     public ArrayList<Attendance> getAttendancesBySession(int sesid) {
         ArrayList<Attendance> atts = new ArrayList<>();
         try {
-            String sql = "SELECT s.stuid,s.stuname,\n" +
-"	  ISNULL(a.status,0) as [status]\n" +
-"	  ,ISNULL(a.description,'') as [description],\n" +
-"	   ISNULL(a.att_datetime,GETDATE()) as att_datetime\n" +
-"	  FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid\n" +
-"									INNER JOIN Group_Student gs ON g.gid = gs.gid\n" +
-"									INNER JOIN Student s ON s.stuid = gs.stuid\n" +
-"									LEFT JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid\n"
+            String sql = "SELECT s.stuid,s.stuname,\n"
+                    + "	  ISNULL(a.status,0) as [status]\n"
+                    + "	  ,ISNULL(a.description,'') as [description],\n"
+                    + "	   ISNULL(a.att_datetime,GETDATE()) as att_datetime\n"
+                    + "	  FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid\n"
+                    + "									INNER JOIN Group_Student gs ON g.gid = gs.gid\n"
+                    + "									INNER JOIN Student s ON s.stuid = gs.stuid\n"
+                    + "									LEFT JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid\n"
                     + "	  WHERE ses.sesid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sesid);
             ResultSet rs = stm.executeQuery();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 Attendance att = new Attendance();
                 Student s = new Student();
                 Session ses = new Session();
@@ -51,26 +51,25 @@ public class AttendenceDBContext extends DBContext {
                 att.setDatetime(rs.getTimestamp("att_datetime"));
                 atts.add(att);
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AttendenceDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return atts;
     }
 
-
     public ArrayList<Attendance> getAttendancesByGroupID(int gid) {
         ArrayList<Attendance> atts = new ArrayList<>();
         try {
             String sql = "SELECT s.stuid,s.stuname,ses.isAtt,\n"
-                    + "	  ISNULL(a.status,0) as [status]\n"
-                    + "	  ,ISNULL(a.description,'') as [description],\n"
-                    + "	   ISNULL(a.att_datetime,GETDATE()) as att_datetime\n"
-                    + "	  FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid\n"
-                    + "									INNER JOIN Group_Student gs ON g.gid = gs.gid\n"
-                    + "									INNER JOIN Student s ON s.stuid = gs.stuid\n"
-                    + "									LEFT JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid\n"
-                    + "	  WHERE g.gid = ?";
+                    + "                      ISNULL(a.status,0) as [status]\n"
+                    + "                   	  ,ISNULL(a.description,'') as [description],\n"
+                    + "                       ISNULL(a.att_datetime,GETDATE()) as att_datetime\n"
+                    + "                    	  FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid\n"
+                    + "                    									INNER JOIN Group_Student gs ON g.gid = gs.gid\n"
+                    + "                    									INNER JOIN Student s ON s.stuid = gs.stuid\n"
+                    + "                    								 JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid\n"
+                    + "                    	  WHERE g.gid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, gid);
             ResultSet rs = stm.executeQuery();
@@ -104,11 +103,13 @@ public class AttendenceDBContext extends DBContext {
         for (Student stu : s) {
             int absentCount = 0;
             for (Attendance attn : att) {
-                if (attn.getStudent().getId().equals(stu.getId()) && attn.getSession().isIsAtt() == true && attn.isStatus()==false) {
+                if (attn.getStudent().getId().equals(stu.getId()) && attn.getSession().isIsAtt() == true && attn.isStatus() == false) {
                     absentCount++;
                 }
             }
-            float absentPercentFloat = (float) absentCount / ses.size();
+            float absentPercentFloat = ((float) absentCount / ses.size()) * 100;
+            //Lay 2 so 0 sau dau phay
+            absentPercentFloat = round(absentPercentFloat * 100) / 100;
             absentPercent.add(absentPercentFloat);
         }
         return absentPercent;

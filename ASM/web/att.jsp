@@ -142,8 +142,9 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${requestScope.atts}" var="a" >
+                        <c:set var="i" value="${i+1}"/>
                         <tr>
-                            <td></td>
+                            <td>${i}</td>
                             
                             <td style="color: blue">${requestScope.ses.getGroup().getName()}</td>
                             
