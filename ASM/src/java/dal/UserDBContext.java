@@ -8,6 +8,8 @@ import Model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,6 +17,7 @@ import java.sql.SQLException;
  */
 public class UserDBContext extends DBContext{
     public User check(String username, String password) throws SQLException {
+        try {
         String sql = "SELECT [id]\n"
                 + "      ,[username]\n"
                 + "      ,[password]\n"
@@ -29,9 +32,10 @@ public class UserDBContext extends DBContext{
             User us = new User(rs.getInt("id"),rs.getString("username"), rs.getString("password"), rs.getString("displayname"));
             return us;
         }
-        try {
+        
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
+             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
         }
         return null;
     }

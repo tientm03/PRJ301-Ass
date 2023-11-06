@@ -16,7 +16,31 @@
             background-color: #f8f9fa;
             color: #333;
         }
+        header {
+                background-color: #6B90DA;
+                color: #333;
+                padding: 10px 0;
+                text-align: center;
+            }
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
 
+            nav ul li {
+                display: inline;
+                margin-right: 20px;
+            }
+
+            nav ul li a {
+                color: #333;
+                text-decoration: none;
+                
+            }
+
+            nav ul li a:hover {
+                text-decoration: underline;
+            }
         .header-logo {
             display: flex;
             align-items: center;
@@ -113,82 +137,80 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TimeTable</title>
     </head>
-    <body>
-        <form class="header-logo">
-            <img src="image/270052549_1118285278708777_8870144974468907802_n.jpg" alt="alt" width="167px" height="50px"/>
-            <img src="image/top601.jpg" alt="alt" width="243.6px" height="30.75px"/>
-        </form>
-        <br>
-        <form style="background-color:aliceblue; padding: 5px 8px; margin-bottom: 5px; ">
-            <ul class="breadcrumb">
-
-                <span id="home"><a href="home">Home</a>&nbsp;|&nbsp;<b>Schedule</b></span>
+    <br>
+    <header>
+        <h1>FPT University Academic Portal </h1>
+        <nav>
+            <ul>
+                <li><a href="home">Home</a></li>
+                <li><a href="reportatt?iid=${sessionScope.account.id}">Attendance report</a></li>
             </ul>
-        </form>
+        </nav>
+    </header>
 
-        <h1>TimeTable</h1>
+                <h1>TimeTable ${requestScope.us}</h1>
 
 
-        <form style="text-align: center">
-            Lecturer: <input type="text" name="lecturer" value="${sessionScope.account.displayname}" style="text-align: center;"/>
-        </form>
+    <form style="text-align: center">
+        Lecturer: <input type="text" name="lecturer" value="${sessionScope.account.displayname}" style="text-align: center;"/>
+    </form>
 
-        <!--code bang timetable-->
-        <form action="timetable" method="GET">
-            <input type="hidden" name="id" value="${param.id}"/>
-            From <input type="date" value="${requestScope.from}" name="from"/> 
-            To <input type="date" value="${requestScope.to}" name="to"/> 
-            <input type="submit" value="View"/>
-        </form>
-        <table border="1px">
-            <thead>
-                <tr>
-                    <c:forEach items="${requestScope.day}" var="day">
-                        <td>
-                            ${day}
-                        </td>
-                    </c:forEach>
-                    <!--                                        <th rowspan="2"></th>
-                                                            <th align="center">Mon</th>
-                                                            <th align="center">Tue</th>
-                                                            <th align="center">Wed</th>
-                                                            <th align="center">Thu</th>
-                                                            <th align="center">Fri</th>
-                                                            <th align="center">Sat</th>
-                                                            <th align="center">Sun</th>-->
-                </tr>
-                <tr>
-                    <td></td>
-                    <c:forEach items="${requestScope.dates}" var="d">
-                        <td>
-                            ${d}
-                        </td>
-                    </c:forEach>
-                </tr>
-            </thead>
-            <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
-                <tr>
-                    <td>Slot ${s.id} (${s.description})</td>
-                    <c:forEach items="${requestScope.dates}" var="d">
-                        <td>
-                            <c:forEach items="${requestScope.sessions}" var="k">
-                                <c:if test="${k.date eq d and k.slot.id eq s.id}">
-                                    <a href="att?id=${k.id}">
-                                        ${k.group.name}-${k.group.subject.name}-${k.room.id}
-                                        <c:if test="${k.isAtt}">
-                                            (attended)
-                                        </c:if>
-                                        <c:if test="${!k.isAtt}">
-                                            (not yet)
-                                        </c:if>
-                                    </a>
-                                </c:if>
-                            </c:forEach>
-                        </td>
-                    </c:forEach>
-                </tr>
-            </c:forEach>
+    <!--code bang timetable-->
+    <form action="timetable" method="GET">
+        <input type="hidden" name="id" value="${param.id}"/>
+        From <input type="date" value="${requestScope.from}" name="from"/> 
+        To <input type="date" value="${requestScope.to}" name="to"/> 
+        <input type="submit" value="View"/>
+    </form>
+    <table border="1px">
+        <thead>
+            <tr>
+                <c:forEach items="${requestScope.day}" var="day">
+                    <td>
+                        ${day}
+                    </td>
+                </c:forEach>
+                <!--                                        <th rowspan="2"></th>
+                                                        <th align="center">Mon</th>
+                                                        <th align="center">Tue</th>
+                                                        <th align="center">Wed</th>
+                                                        <th align="center">Thu</th>
+                                                        <th align="center">Fri</th>
+                                                        <th align="center">Sat</th>
+                                                        <th align="center">Sun</th>-->
+            </tr>
+            <tr>
+                <td></td>
+                <c:forEach items="${requestScope.dates}" var="d">
+                    <td>
+                        ${d}
+                    </td>
+                </c:forEach>
+            </tr>
+        </thead>
+        <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
+            <tr>
+                <td>Slot ${s.id} (${s.description})</td>
+                <c:forEach items="${requestScope.dates}" var="d">
+                    <td>
+                        <c:forEach items="${requestScope.sessions}" var="k">
+                            <c:if test="${k.date eq d and k.slot.id eq s.id}">
+                                <a href="att?id=${k.id}">
+                                    ${k.group.name}-${k.group.subject.name}-${k.room.id}
+                                    <c:if test="${k.isAtt}">
+                                        (attended)
+                                    </c:if>
+                                    <c:if test="${!k.isAtt}">
+                                        (not yet)
+                                    </c:if>
+                                </a>
+                            </c:if>
+                        </c:forEach>
+                    </td>
+                </c:forEach>
+            </tr>
+        </c:forEach>
 
-        </table>
-    </body>
+    </table>
+</body>
 </html>

@@ -21,6 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import DateUtils.Utils;
 import static DateUtils.Utils.getSQLDatesBetween;
+import Model.Intructor;
+import Model.User;
+import dal.IntructorDBContext;
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -35,43 +38,53 @@ public class TimeTable extends HttpServlet {
 
         HttpSession session = request.getSession();
         if (session.getAttribute("account") == null) {
-            request.setAttribute("error","You have to log in first!");
+            request.setAttribute("error", "You have to log in first!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            response.setContentType("text/html;charset=UTF-8");
-            int id = Integer.parseInt(request.getParameter("id"));
-            String s_from = request.getParameter("from");
-            String s_to = request.getParameter("to");
-            ArrayList<Date> dates = new ArrayList<>();
-            if (s_from == null)// this week
-            {
-                dates = (ArrayList<Date>) Utils.getDatesOfCurrentWeek();
-            } else {
-                try {
-                    dates = (ArrayList<Date>) getSQLDatesBetween(s_from, s_to);
-                } catch (ParseException ex) {
-                    Logger.getLogger(TimeTable.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            Date from = dates.get(0);
-            Date to = dates.get(dates.size() - 1);
-            
-            TimeSlotDBContext timeDB = new TimeSlotDBContext();
-            ArrayList<TimeSlot> slots = timeDB.list();
+            try {
+                response.setContentType("text/html;charset=UTF-8");
+                int id = Integer.parseInt(request.getParameter("id"));
+                User us = (User) session.getAttribute("account");
 
-            SessionDBContext sesDB = new SessionDBContext();
-            ArrayList<Session> sessions = sesDB.getSessions(id, from, to);
-            
-            
-            request.setAttribute("slots", slots);
-            request.setAttribute("dates", dates);
-            request.setAttribute("from", from);
-            request.setAttribute("to", to);
-            request.setAttribute("sessions", sessions);
-            
-            request.getRequestDispatcher("timetable.jsp").forward(request, response);
-            
-            
+                IntructorDBContext idb = new IntructorDBContext();
+                Intructor in = idb.check(us.getDisplayname());
+                if (id != in.getId()) {
+                    
+                } 
+                else {
+                    String s_from = request.getParameter("from");
+                    String s_to = request.getParameter("to");
+                    ArrayList<Date> dates = new ArrayList<>();
+                    if (s_from == null)// this week
+                    {
+                        dates = (ArrayList<Date>) Utils.getDatesOfCurrentWeek();
+                    } else {
+                        try {
+                            dates = (ArrayList<Date>) getSQLDatesBetween(s_from, s_to);
+                        } catch (ParseException ex) {
+                            Logger.getLogger(TimeTable.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    Date from = dates.get(0);
+                    Date to = dates.get(dates.size() - 1);
+
+                    TimeSlotDBContext timeDB = new TimeSlotDBContext();
+                    ArrayList<TimeSlot> slots = timeDB.list();
+
+                    SessionDBContext sesDB = new SessionDBContext();
+                    ArrayList<Session> sessions = sesDB.getSessions(id, from, to);
+
+                    request.setAttribute("slots", slots);
+                    request.setAttribute("dates", dates);
+                    request.setAttribute("from", from);
+                    request.setAttribute("to", to);
+                    request.setAttribute("sessions", sessions);
+                }
+                request.getRequestDispatcher("timetable.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(TimeTable.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }
 
