@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class Report extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,30 +41,21 @@ public class Report extends HttpServlet {
             request.setAttribute("error", "You have to log in first!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            try {
-                int iid = Integer.parseInt(request.getParameter("iid"));
-                User us = (User) session.getAttribute("account");
-                
-                IntructorDBContext idb = new IntructorDBContext();
-                Intructor in = idb.check(us.getDisplayname());
-                if (iid != in.getId()) {
-                    request.setAttribute("err", "AccessDenied");
-                                        request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
-
-                } else {
-                    GroupDBContext gdb = new GroupDBContext();
-                    ArrayList<Group> group = gdb.getGroupByIntructorID(iid);
-                    request.setAttribute("group", group);
-                    request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
-                }
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+            int iid = Integer.parseInt(request.getParameter("iid"));
+            User us = (User) session.getAttribute("account");
+            if (iid != us.getId()) {
+                request.setAttribute("error", "Can't view");
+                request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
+            } else {
+                GroupDBContext gdb = new GroupDBContext();
+                ArrayList<Group> group = gdb.getGroupByIntructorID(iid);
+                request.setAttribute("group", group);
+                request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
             }
-            
+
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -73,31 +64,31 @@ public class Report extends HttpServlet {
         SessionDBContext sedb = new SessionDBContext();
         StudentDBContext sdb = new StudentDBContext();
         AttendenceDBContext adb = new AttendenceDBContext();
-        
+
         GroupDBContext gdb = new GroupDBContext();
         ArrayList<Group> group = gdb.getGroupByIntructorID(iid);
         request.setAttribute("group", group);
-        
+
         ArrayList<Student> stu = sdb.getStuByGroupID(gid);
         request.setAttribute("student", stu);
-        
+
         ArrayList<Session> ses = sedb.getSessionsByGroupID(gid);
         request.setAttribute("sessions", ses);
-        
+
         ArrayList<Attendance> atts = adb.getAttendancesByGroupID(gid);
         request.setAttribute("att", atts);
-        
+
         ArrayList<Float> absent = adb.getAbsent(stu, ses, atts);
         request.setAttribute("absent", absent);
-        
+
         Session s = sedb.get1SessionsByGroupID(gid);
         request.setAttribute("session", s);
-        
+
         ArrayList<Session> sesnotatt = sedb.notYetSessions(gid);
         request.setAttribute("sesnotatt", sesnotatt);
-        
+
         request.getRequestDispatcher("attendancereport.jsp").forward(request, response);
-        
+
     }
-    
+
 }

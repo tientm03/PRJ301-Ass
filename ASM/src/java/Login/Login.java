@@ -47,6 +47,7 @@ public class Login extends HttpServlet {
             }
             else{
                 session.setAttribute("account", us);
+                session.setAttribute("uid", us.getId());
                 String remember = request.getParameter("remember");
             if (remember != null) {
                 Cookie c_user = new Cookie("user", u);

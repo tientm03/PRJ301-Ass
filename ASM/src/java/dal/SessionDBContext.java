@@ -306,4 +306,23 @@ public class SessionDBContext extends DBContext {
         }
         return sessions;
     }
+    public ArrayList<Session> getSessionByUserID(int uid) {
+        ArrayList<Session> sesid = new ArrayList<>();
+        try {
+            String sql = "select s.sesid from [Session] s join Instructor i on s.iid = i.iid join [User] us on us.id = i.iid\n"
+                    + "where us.id =?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, uid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Session session = new Session();
+                session.setId(rs.getInt("sesid"));
+                sesid.add(session);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sesid;
+    }
 }

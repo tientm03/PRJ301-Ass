@@ -18,12 +18,11 @@ import java.util.logging.Logger;
  */
 public class IntructorDBContext extends DBContext {
 
-    public Intructor check(String displayname) throws SQLException {
-        String sql = "select i.iid,i.iname,i.igender,i.idob,i.iaddress,i.imail,u.username,u.password,u.displayname from Instructor as i "
-                + "join [User] as u on i.iid = u.id where displayname = ? ";
+    public Intructor getIntructorBySesid(int sesid) throws SQLException {
+        String sql = "select i.iid from Instructor i join [Session] s on i.iid = s.iid where s.sesid=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, displayname);
+            st.setInt(1, sesid);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 Intructor i = new Intructor();

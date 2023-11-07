@@ -39,5 +39,21 @@ public class UserDBContext extends DBContext{
         }
         return null;
     }
-
+    public User getUser(int id) throws SQLException {
+        try {
+        String sql = "select us.id from [User] us where us.id=1";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1,id);
+        ResultSet rs = st.executeQuery();
+        if(rs.next()){
+            User us = new User(rs.getInt("id"),rs.getString("username"), rs.getString("password"), rs.getString("displayname"));
+            return us;
+        }
+        
+            
+        } catch (SQLException e) {
+             Logger.getLogger(UserDBContext.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
 }

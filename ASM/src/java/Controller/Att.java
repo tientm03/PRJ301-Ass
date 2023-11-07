@@ -5,9 +5,12 @@
 package Controller;
 
 import Model.Attendance;
+import Model.Intructor;
 import Model.Session;
 import Model.Student;
+import Model.User;
 import dal.AttendenceDBContext;
+import dal.IntructorDBContext;
 import dal.SessionDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +18,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,16 +34,28 @@ public class Att extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SessionDBContext db = new SessionDBContext();
-        int id = Integer.parseInt(request.getParameter("id"));
-        Session ses = db.getSessions(id);
-        request.setAttribute("ses",ses);
-        
-        AttendenceDBContext attDb = new AttendenceDBContext();
-        ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
-
-        request.setAttribute("atts", atts);
-        request.getRequestDispatcher("att.jsp").forward(request, response);
+        try {
+            HttpSession session = request.getSession(); 
+            SessionDBContext db = new SessionDBContext();
+            int id = Integer.parseInt(request.getParameter("id"));
+            Session ses = db.getSessions(id);
+            request.setAttribute("ses",ses);
+            
+            AttendenceDBContext attDb = new AttendenceDBContext();
+            ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
+            IntructorDBContext idb = new IntructorDBContext();
+            Intructor in = idb.getIntructorBySesid(id);
+            int id2 = in.getId();
+            User us = (User) session.getAttribute("account");
+            request.setAttribute("id", id2);
+//            if(in.getId()!=us.getId()){
+//                response.getWriter().print("Access");
+//            }
+            request.setAttribute("atts", atts);
+            request.getRequestDispatcher("att.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Att.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     

@@ -126,6 +126,7 @@
             </nav>
         </header>
         <h3 style="color:red ;text-align: center">${requestScope.err}</h3>
+        <h3>${requestScope.error}</h3>
         <form action="reportatt" method="post">
             Group:<select name="gid">
 
@@ -198,12 +199,4 @@
         </table>
 
     </body>
-    <script>
-        function showAlert() {
-            alert(${requestScope.err});
-        }
-        window.onload = function () {
-            showAlert();
-        }
-    </script>
 </html>

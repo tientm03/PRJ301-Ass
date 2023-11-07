@@ -124,7 +124,7 @@
         <h1>Student List</h1>
         <h4>        ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
         </h4>
-
+        ${requestScope.id}
         <form action="att" method="POST">
             <table border="1" style="margin: 0 auto ;width: 80%;">
                 <thead>
