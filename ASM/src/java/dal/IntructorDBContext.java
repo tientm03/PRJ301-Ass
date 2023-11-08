@@ -19,26 +19,20 @@ import java.util.logging.Logger;
 public class IntructorDBContext extends DBContext {
 
     public Intructor getIntructorBySesid(int sesid) throws SQLException {
+        Intructor i = new Intructor();
         String sql = "select i.iid from Instructor i join [Session] s on i.iid = s.iid where s.sesid=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, sesid);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                Intructor i = new Intructor();
+
                 i.setId(rs.getInt("iid"));
                 i.setName(rs.getString("iname"));
                 i.setGender(rs.getBoolean("igender"));
                 i.setDob(rs.getDate("idob"));
                 i.setAddress(rs.getString("iaddress"));
                 i.setEmail(rs.getString("imail"));
-
-                User us = new User();
-                us.setUsername(rs.getString("username"));
-                us.setPassword(rs.getString("password"));
-                us.setDisplayname(rs.getString("displayname"));
-
-                i.setUser(us);
                 return i;
             }
 
@@ -46,8 +40,7 @@ public class IntructorDBContext extends DBContext {
             Logger.getLogger(IntructorDBContext.class.getName()).log(Level.SEVERE, null, e);
 
         }
-        return null;
+        return i;
     }
 
-  
 }

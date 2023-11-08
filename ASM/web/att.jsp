@@ -98,7 +98,40 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        header {
+                background-color: #6B90DA;
+                color: #333;
+                padding: 10px 0;
+                text-align: center;
+            }
+            nav ul {
+                list-style-type: none;
+                padding: 0;
+            }
 
+            nav ul li {
+                display: inline;
+                margin-right: 20px;
+            }
+
+            nav ul li a {
+                color: #333;
+                text-decoration: none;
+
+            }
+
+            nav ul li a:hover {
+                text-decoration: underline;
+            }
+            input[type="submit"] {
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
     </style>
 
     <head>
@@ -106,25 +139,22 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <br>
-        <form class="header-logo">
-            <img src="image/270052549_1118285278708777_8870144974468907802_n.jpg" alt="alt" width="167px" height="50px"/>
-            <img src="image/top601.jpg" alt="alt" width="243.6px" height="30.75px"/>
-        </form>
-        <br>
-        <br>
-
-        <form style="background-color:aliceblue; padding: 5px 8px; margin-bottom: 5px; ">
-            <ul class="breadcrumb">
-
-                <span id="home"><a href="#">Home</a>&nbsp;|&nbsp;<a href="#">Schedule</a>&nbsp;|&nbsp;<b>Attendance Activities</b></span>
-            </ul>
-        </form>
-
+        <header>
+            <br>
+            <h1>FPT University Academic Portal </h1>
+            <nav>
+                <ul>
+                    <li><a href="home">Home</a></li>
+                    <li><a href="timetable?id=${sessionScope.account.id}">Weekly Timetable</a></li>
+                    <li><a href="reportatt?iid=${sessionScope.account.id}">Attendance report</a></li>
+                </ul>
+            </nav>
+        </header>
+        <h3 style="color:red ;text-align: center">${requestScope.error}</h3>
         <h1>Student List</h1>
-        <h4>        ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
+        <h4>Attendance Taking for class:${requestScope.ses.group.name}-Subject:${requestScope.ses.group.subject.name}
         </h4>
-        ${requestScope.id}
+    
         <form action="att" method="POST">
             <table border="1" style="margin: 0 auto ;width: 80%;">
                 <thead>
@@ -154,7 +184,8 @@
                                 ${a.student.name}
                                 <input type="hidden" name="stuid" value="${a.student.id}"/>
                             </td>
-                            <td></td>
+                            <td><img src="" alt="Ảnh học sinh"/>
+                            </td>
                             <td>
                                 <input type="radio"
                                        <c:if test="${!a.status}">

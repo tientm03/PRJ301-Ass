@@ -66,24 +66,32 @@ public class Report extends HttpServlet {
         AttendenceDBContext adb = new AttendenceDBContext();
 
         GroupDBContext gdb = new GroupDBContext();
+        
+        //lay ra tat ca group ma intructor day
         ArrayList<Group> group = gdb.getGroupByIntructorID(iid);
         request.setAttribute("group", group);
-
+        
+        //lay ra sinh vien trong lop co gid tuong ung
         ArrayList<Student> stu = sdb.getStuByGroupID(gid);
         request.setAttribute("student", stu);
-
+        
+        //lay ra tat ca session ma lop do phai hoc
         ArrayList<Session> ses = sedb.getSessionsByGroupID(gid);
         request.setAttribute("sessions", ses);
 
+        //lay ra student hoc trong group co gid tuong ung
         ArrayList<Attendance> atts = adb.getAttendancesByGroupID(gid);
         request.setAttribute("att", atts);
 
+        //tinh so buoi nghi cua sinh vien
         ArrayList<Float> absent = adb.getAbsent(stu, ses, atts);
         request.setAttribute("absent", absent);
 
+        //lay ra 1 session theo gid
         Session s = sedb.get1SessionsByGroupID(gid);
-        request.setAttribute("session", s);
-
+        request.setAttribute("session", s); 
+        
+        //lay ra nhung session chua duoc diem danh
         ArrayList<Session> sesnotatt = sedb.notYetSessions(gid);
         request.setAttribute("sesnotatt", sesnotatt);
 

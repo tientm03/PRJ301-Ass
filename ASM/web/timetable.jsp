@@ -137,8 +137,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TimeTable</title>
     </head>
-    <br>
+    
     <header>
+        <br>
         <h1>FPT University Academic Portal </h1>
         <nav>
             <ul>

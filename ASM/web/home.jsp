@@ -82,8 +82,9 @@ footer {
     </head>
     <body>
 
-        <br>
+        
         <header>
+            <br>
             <h1>FPT University Academic Portal </h1>
             <nav>
                 <ul>

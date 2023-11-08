@@ -115,13 +115,14 @@
         </style>
     </head>
     <body>
-        <br>
+        
         <header>
+            <br>
             <h1>FPT University Academic Portal </h1>
             <nav>
                 <ul>
                     <li><a href="home">Home</a></li>
-                    <li><a href="reportatt?iid=${sessionScope.account.id}">Attendance report</a></li>
+                    <li><a href="timetable?id=${sessionScope.account.id}">Weekly Timetable</a></li>
                 </ul>
             </nav>
         </header>
@@ -140,7 +141,7 @@
             <input type="submit" value="View" /><br>
         </form>
         <br>
-        <h4>Attendance Report for class ${requestScope.session.group.name}</h4>
+        <h4>Attendance Report for class ${requestScope.session.group.name}-Subject ${requestScope.session.getGroup().getSubject().getName()}</h4>
 
         <table border="1" style="margin: 0 auto ;width: 90%;">
             <thead>
@@ -187,7 +188,7 @@
                             <td style="color: red">    ${requestScope.absent[i-1]}%</td>
                         </c:if> 
                         <c:if test="${requestScope.absent[i-1] eq 20}">
-                            <td style="color: yellow">    ${requestScope.absent[i-1]}%</td>
+                            <td style="color: gold">    ${requestScope.absent[i-1]}%</td>
                         </c:if> 
                         <c:if test="${requestScope.absent[i-1]<20}">
                             <td style="color: green">    ${requestScope.absent[i-1]}%</td>

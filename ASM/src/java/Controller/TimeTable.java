@@ -14,16 +14,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import DateUtils.Utils;
 import static DateUtils.Utils.getSQLDatesBetween;
-import Model.Intructor;
 import Model.User;
-import dal.IntructorDBContext;
 import jakarta.servlet.http.HttpSession;
 
 /**

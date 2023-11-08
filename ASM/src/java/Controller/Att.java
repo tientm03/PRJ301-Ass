@@ -30,35 +30,39 @@ import java.util.logging.Logger;
  */
 public class Att extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            HttpSession session = request.getSession(); 
+            HttpSession session = request.getSession();
             SessionDBContext db = new SessionDBContext();
             int id = Integer.parseInt(request.getParameter("id"));
             Session ses = db.getSessions(id);
-            request.setAttribute("ses",ses);
             
+
             AttendenceDBContext attDb = new AttendenceDBContext();
             ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
+            
+            
             IntructorDBContext idb = new IntructorDBContext();
             Intructor in = idb.getIntructorBySesid(id);
-            int id2 = in.getId();
+
             User us = (User) session.getAttribute("account");
-            request.setAttribute("id", id2);
-//            if(in.getId()!=us.getId()){
-//                response.getWriter().print("Access");
-//            }
-            request.setAttribute("atts", atts);
-            request.getRequestDispatcher("att.jsp").forward(request, response);
+            if (in.getId() != us.getId()) {
+                request.setAttribute("error", "Can't view");
+                request.getRequestDispatcher("att.jsp").forward(request, response);
+            } else {
+                request.setAttribute("ses", ses);
+                request.setAttribute("atts", atts);
+                request.getRequestDispatcher("att.jsp").forward(request, response);
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(Att.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -71,14 +75,13 @@ public class Att extends HttpServlet {
             Student s = new Student();
             s.setId(stuid);
             a.setStudent(s);
-            a.setStatus(request.getParameter("status"+stuid).equals("present"));
-            a.setDescription(request.getParameter("description"+stuid));
+            a.setStatus(request.getParameter("status" + stuid).equals("present"));
+            a.setDescription(request.getParameter("description" + stuid));
             ses.getAtts().add(a);
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
         response.getWriter().println("done");
     }
-
 
 }
