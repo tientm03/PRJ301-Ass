@@ -99,41 +99,49 @@
             background-color: #0056b3;
         }
         header {
-                background-color: #6B90DA;
-                color: #333;
-                padding: 10px 0;
-                text-align: center;
-            }
-            nav ul {
-                list-style-type: none;
-                padding: 0;
-            }
+            background-color: #6B90DA;
+            color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-            nav ul li {
-                display: inline;
-                margin-right: 20px;
-            }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
 
-            nav ul li a {
-                color: #333;
-                text-decoration: none;
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
 
-            }
+        }
 
-            nav ul li a:hover {
-                text-decoration: underline;
-            }
-            input[type="submit"] {
-                background-color: #007BFF;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
     </style>
-
+     <script type="text/javascript">
+        function save(){
+            
+                window.location="AttDone.jsp";
+            
+        }
+}
+        
+    </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -154,7 +162,7 @@
         <h1>Student List</h1>
         <h4>Attendance Taking for class:${requestScope.ses.group.name}-Subject:${requestScope.ses.group.subject.name}
         </h4>
-    
+
         <form action="att" method="POST">
             <table border="1" style="margin: 0 auto ;width: 80%;">
                 <thead>
@@ -175,11 +183,11 @@
                         <c:set var="i" value="${i+1}"/>
                         <tr>
                             <td>${i}</td>
-                            
+
                             <td style="color: blue">${requestScope.ses.getGroup().getName()}</td>
-                            
+
                             <td style="color: #007BFF">${a.student.id}</td>
-                            
+
                             <td style="color: blue">
                                 ${a.student.name}
                                 <input type="hidden" name="stuid" value="${a.student.id}"/>
@@ -195,10 +203,10 @@
                                 <label for="status${a.student.id}" style="color: red;">absent</label>
                                 <br>
                                 &nbsp;<input type="radio"
-                                       <c:if test="${a.status}">
-                                           checked="checked"
-                                       </c:if>
-                                       name="status${a.student.id}" value="present" />
+                                             <c:if test="${a.status}">
+                                                 checked="checked"
+                                             </c:if>
+                                             name="status${a.student.id}" value="present" />
                                 <label for="status${a.student.id}" style="color: green;">present</label>
                             </td>
                             <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
@@ -209,7 +217,9 @@
             </table>
             <br>
             <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
-            <input type="submit" value="Save"/>
+            <div style="text-align: center;">
+                <input type="submit" value="Save" />
+            </div>
         </form>
 
 

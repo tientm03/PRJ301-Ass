@@ -79,7 +79,7 @@ public class Report extends HttpServlet {
         ArrayList<Session> ses = sedb.getSessionsByGroupID(gid);
         request.setAttribute("sessions", ses);
 
-        //lay ra student hoc trong group co gid tuong ung
+        //lay ra bangdiemdanh cua lop do group co gid tuong ung
         ArrayList<Attendance> atts = adb.getAttendancesByGroupID(gid);
         request.setAttribute("att", atts);
 

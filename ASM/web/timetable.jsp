@@ -17,30 +17,30 @@
             color: #333;
         }
         header {
-                background-color: #6B90DA;
-                color: #333;
-                padding: 10px 0;
-                text-align: center;
-            }
-            nav ul {
-                list-style-type: none;
-                padding: 0;
-            }
+            background-color: #6B90DA;
+            color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-            nav ul li {
-                display: inline;
-                margin-right: 20px;
-            }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
 
-            nav ul li a {
-                color: #333;
-                text-decoration: none;
-                
-            }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
 
-            nav ul li a:hover {
-                text-decoration: underline;
-            }
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
         .header-logo {
             display: flex;
             align-items: center;
@@ -137,7 +137,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>TimeTable</title>
     </head>
-    
     <header>
         <br>
         <h1>FPT University Academic Portal </h1>
@@ -149,7 +148,9 @@
         </nav>
     </header>
 
-                <h1>TimeTable ${requestScope.us}</h1>
+
+
+    <h1>TimeTable</h1>
 
 
     <form style="text-align: center">
@@ -182,26 +183,26 @@
             </tr>
             <tr>
                 <td></td>
-                <c:forEach items="${requestScope.dates}" var="d">
+                <c:forEach items="${requestScope.dates}" var="date">
                     <td>
-                        ${d}
+                        ${date}
                     </td>
                 </c:forEach>
             </tr>
         </thead>
-        <c:forEach items="${requestScope.slots}" var="s" varStatus="loop">
+        <c:forEach items="${requestScope.slots}" var="slots" varStatus="loop">
             <tr>
-                <td>Slot ${s.id} (${s.description})</td>
-                <c:forEach items="${requestScope.dates}" var="d">
+                <td>Slot ${slots.id} (${slots.description})</td>
+                <c:forEach items="${requestScope.dates}" var="date">
                     <td>
-                        <c:forEach items="${requestScope.sessions}" var="k">
-                            <c:if test="${k.date eq d and k.slot.id eq s.id}">
-                                <a href="att?id=${k.id}">
-                                    ${k.group.name}-${k.group.subject.name}-${k.room.id}
-                                    <c:if test="${k.isAtt}">
+                        <c:forEach items="${requestScope.sessions}" var="sessions">
+                            <c:if test="${sessions.date eq date and sessions.slot.id eq slots.id}">
+                                <a href="att?id=${sessions.id}">
+                                    ${sessions.group.name}-${sessions.group.subject.name}-${sessions.room.id}
+                                    <c:if test="${sessions.isAtt}">
                                         (attended)
                                     </c:if>
-                                    <c:if test="${!k.isAtt}">
+                                    <c:if test="${!sessions.isAtt}">
                                         (not yet)
                                     </c:if>
                                 </a>

@@ -130,7 +130,6 @@
         <h3>${requestScope.error}</h3>
         <form action="reportatt" method="post">
             Group:<select name="gid">
-
                 <c:forEach items="${requestScope.group}" var="group">
                     <option <c:if test="${group.id eq param.gid}">
                             selected="selected"

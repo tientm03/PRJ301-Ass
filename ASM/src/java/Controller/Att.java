@@ -36,10 +36,11 @@ public class Att extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             SessionDBContext db = new SessionDBContext();
+            //lay ra sesid
             int id = Integer.parseInt(request.getParameter("id"));
             Session ses = db.getSessions(id);
             
-
+            
             AttendenceDBContext attDb = new AttendenceDBContext();
             ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
             
@@ -81,7 +82,7 @@ public class Att extends HttpServlet {
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
-        response.getWriter().println("done");
+        response.sendRedirect("AttDone.jsp");
     }
 
 }
