@@ -33,35 +33,38 @@ public class Att extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            HttpSession session = request.getSession();
-            SessionDBContext db = new SessionDBContext();
-            //lay ra sesid
-            int id = Integer.parseInt(request.getParameter("id"));
-            Session ses = db.getSessions(id);
-            
-            
-            AttendenceDBContext attDb = new AttendenceDBContext();
-            ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
-            
-            
-            IntructorDBContext idb = new IntructorDBContext();
-            Intructor in = idb.getIntructorBySesid(id);
+        HttpSession session = request.getSession();
+        if (session.getAttribute("account") == null) {
+            request.setAttribute("error", "You have to log in first!");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        } else {
+            try {
 
-            User us = (User) session.getAttribute("account");
-            if (in.getId() != us.getId()) {
-                request.setAttribute("error", "Can't view");
-                request.getRequestDispatcher("att.jsp").forward(request, response);
-            } else {
-                request.setAttribute("ses", ses);
-                request.setAttribute("atts", atts);
-                request.getRequestDispatcher("att.jsp").forward(request, response);
+                SessionDBContext db = new SessionDBContext();
+                //lay ra sesid
+                int id = Integer.parseInt(request.getParameter("id"));
+                Session ses = db.getSessions(id);
+
+                AttendenceDBContext attDb = new AttendenceDBContext();
+                ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
+
+                IntructorDBContext idb = new IntructorDBContext();
+                Intructor in = idb.getIntructorBySesid(id);
+
+                User us = (User) session.getAttribute("account");
+                if (in.getId() != us.getId()) {
+                    request.setAttribute("error", "Can't view");
+                    request.getRequestDispatcher("att.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("ses", ses);
+                    request.setAttribute("atts", atts);
+                    request.getRequestDispatcher("att.jsp").forward(request, response);
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Att.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Att.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
