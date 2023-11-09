@@ -127,7 +127,7 @@
             </nav>
         </header>
         <h3 style="color:red ;text-align: center">${requestScope.err}</h3>
-        <h3>${requestScope.error}</h3>
+        <h3 style="text-align: center;color: red">${requestScope.error}</h3>
         <form action="reportatt" method="post">
             Group:<select name="gid">
                 <c:forEach items="${requestScope.group}" var="group">
@@ -171,11 +171,11 @@
                                 <c:choose>
 
                                     <c:when test="${att.status}">
-                                        <td style="color: green">${att.status?"attend":"absent"}</td>
+                                        <td style="color: green">absent</td>
                                     </c:when>
 
                                     <c:when test="${!att.status}">
-                                        <td style="color: red">${att.status?"attend":"absent"}</td>
+                                        <td style="color: red">attend</td>
                                     </c:when>
                                 </c:choose>
                             </c:if>

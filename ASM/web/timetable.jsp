@@ -167,21 +167,6 @@
     <table border="1px">
         <thead>
             <tr>
-                <c:forEach items="${requestScope.day}" var="day">
-                    <td>
-                        ${day}
-                    </td>
-                </c:forEach>
-                <!--                                        <th rowspan="2"></th>
-                                                        <th align="center">Mon</th>
-                                                        <th align="center">Tue</th>
-                                                        <th align="center">Wed</th>
-                                                        <th align="center">Thu</th>
-                                                        <th align="center">Fri</th>
-                                                        <th align="center">Sat</th>
-                                                        <th align="center">Sun</th>-->
-            </tr>
-            <tr>
                 <td></td>
                 <c:forEach items="${requestScope.dates}" var="date">
                     <td>

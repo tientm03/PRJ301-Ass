@@ -71,31 +71,31 @@ public class Utils {
     }
 
 
-    public static String getDayOfWeek(Date date) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-
-        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-
-        switch (dayOfWeek) {
-            case Calendar.SUNDAY:
-                return "Chủ nhật";
-            case Calendar.MONDAY:
-                return "Thứ Hai";
-            case Calendar.TUESDAY:
-                return "Thứ Ba";
-            case Calendar.WEDNESDAY:
-                return "Thứ Tư";
-            case Calendar.THURSDAY:
-                return "Thứ Năm";
-            case Calendar.FRIDAY:
-                return "Thứ Sáu";
-            case Calendar.SATURDAY:
-                return "Thứ Bảy";
-
-            default:
-                return "Ngày không hợp lệ";
-        }
-    }
+//    public static String getDayOfWeek(Date date) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//
+//        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+//
+//        switch (dayOfWeek) {
+//            case Calendar.SUNDAY:
+//                return "Chủ nhật";
+//            case Calendar.MONDAY:
+//                return "Thứ Hai";
+//            case Calendar.TUESDAY:
+//                return "Thứ Ba";
+//            case Calendar.WEDNESDAY:
+//                return "Thứ Tư";
+//            case Calendar.THURSDAY:
+//                return "Thứ Năm";
+//            case Calendar.FRIDAY:
+//                return "Thứ Sáu";
+//            case Calendar.SATURDAY:
+//                return "Thứ Bảy";
+//
+//            default:
+//                return "Ngày không hợp lệ";
+//        }
+//    }
 
 }
